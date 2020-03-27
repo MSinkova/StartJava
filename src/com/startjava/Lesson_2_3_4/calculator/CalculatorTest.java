@@ -6,16 +6,14 @@ public class CalculatorTest {
 	
 	public static void main(String[] args) {
 		Calculator calculator = new Calculator();
-		Scanner scan = new Scanner(System.in);
-		String play;
+	    Scanner scan = new Scanner(System.in);
+		String answer;
 		do {
-			System.out.println("Введите математическое выражение: ");
-			calculator.setMathExpression(scan.nextLine());
 			calculator.calculate();
 			do {
 				System.out.println("Вы хотите продолжить? [да/нет]: ");
-				play = scan.next(); 
-			} while (!play.equals("нет") && !play.equals("да"));
-		} while (play.equals("да"));
+				answer = scan.next();
+			} while (!answer.equals("нет") && !answer.equals("да"));
+		} while (answer.equals("да"));
 	}
 }  
