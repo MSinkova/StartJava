@@ -1,9 +1,12 @@
 package com.startjava.Lesson_2_3_4.game;
 
+import java.util.Arrays;
+
 public class Player {
 
 	private String name;
-	private int[] numbers = new int [10];
+	private int attempt;
+	private int[] numbers = new int[10];
 
 	public Player(String name) {
 		this.name = name;
@@ -13,11 +16,24 @@ public class Player {
 		return name;
 	}
 
-	public int[] getNumbers() {
-		return numbers;
+	public int getAttempt() {
+		return attempt;
 	}
 
-	public void setNumbers(int[] number) {
-		this.numbers = number;
+	public void setAttempt(int attempt) {
+		this.attempt = attempt;
+	}
+
+	public int[] getNumbers() {
+		int[] copyNumbers = new int[attempt];
+		return copyNumbers = Arrays.copyOf(numbers, attempt + 1);
+	}
+
+	public void setNumbers(int number) {
+		numbers[attempt] = number;
+	}
+
+	public int[] clearNumber() {
+		return numbers;
 	}
 }
