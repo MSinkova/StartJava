@@ -25,15 +25,14 @@ public class Player {
 	}
 
 	public int[] getNumbers() {
-		int[] copyNumbers = new int[attempt];
-		return copyNumbers = Arrays.copyOf(numbers, attempt + 1);
+		return Arrays.copyOf(numbers, attempt + 1);
 	}
 
-	public void setNumbers(int number) {
+	public void setNumber(int number) {
 		numbers[attempt] = number;
 	}
 
-	public int[] clearNumber() {
-		return numbers;
+	public void clearNumber() {
+		Arrays.fill(numbers, 0, attempt +1 , 0);
 	}
 }
