@@ -20,8 +20,8 @@ public class Player {
 		return attempt;
 	}
 
-	public void setAttempt(int attempt) {
-		this.attempt = attempt;
+	public int setAttempt(int attempt) {
+		return this.attempt = attempt + 1;
 	}
 
 	public int[] getNumbers() {
@@ -32,7 +32,11 @@ public class Player {
 		numbers[attempt] = number;
 	}
 
-	public void clearNumber() {
-		Arrays.fill(numbers, 0, attempt +1 , 0);
+	public void clearNumbers() {
+		Arrays.fill(numbers, 0, attempt + 1, 0);
+	}
+
+	public void setZero() {
+		attempt = 0;
 	}
 }

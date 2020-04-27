@@ -19,53 +19,57 @@ public class GuessNumber {
         secretNumber = (int) (Math.random() * 101);
         System.out.println("Число = " + secretNumber);
         System.out.println("У вас 10 попыток");
-        player1.setAttempt(0);
-        player2.setAttempt(0);
-        while (player1.getAttempt() < 10 || player2.getAttempt() < 10 ) {
-            enterNumbers(player1);
-            enterNumbers(player2);
-            if (suggest(player1) == false && suggest(player2) == false) {
-                player1.setAttempt(player1.getAttempt() + 1);
-                player2.setAttempt(player2.getAttempt() + 1);
-            } else {
+        while (player1.getAttempt() < 10 || player2.getAttempt() < 10) {
+            enterNumber(player1);
+            if (compareNumber(player1) == true) {
+                win(player1);
                 break;
+            } else {
+                enterNumber(player2);
+                if (compareNumber(player2) == true) {
+                    win(player2);
+                    break;
+                }
             }
+            player1.setAttempt(player1.getAttempt());
+            player2.setAttempt(player2.getAttempt());
         }
-        player1.clearNumber();
-        player2.clearNumber();
+        stopGame(player1);
+        stopGame(player2);
+        player1.clearNumbers();
+        player2.clearNumbers();
+        player1.setZero();
+        player2.setZero();
     }
 
-    private void enterNumbers(Player player) {
-            System.out.print(player.getName() + " введите " + (player.getAttempt()) + "-й элемент массива: ");
-            player.setNumber(scan.nextInt());
+    private void enterNumber(Player player) {
+        System.out.print(player.getName() + " введите число: ");
+        player.setNumber(scan.nextInt());
     }
 
-    private boolean suggest(Player player) {
-        int count = player.getAttempt();
-        switch (compareNumbers(player)) {
-            case (1): System.out.println("Игрок " + player.getName() + " угадал число " + secretNumber + " с " + (count + 1) + " попытки");
-                return true;
-            case (2): System.out.println(player.getName() + " .Введенное число < того, что загадал компьютер." + " Осталось попыток " + (9 - count));
-                return false;
-            case (3): System.out.println(player.getName() + " .Введенное число > того, что загадал компьютер." + " Осталось попыток " + (9 - count));
-                return false;
-            case (4): System.out.println("У" + player.getName() + " закончились попытки" + Arrays.toString(player.getNumbers()));
-                return true;
-        }
-        return true;
-    }
-
-    private int compareNumbers(Player player) {
+    private boolean compareNumber(Player player) {
         int number = player.getNumbers()[player.getAttempt()];
         int count = player.getAttempt();
-        if (number == secretNumber && count < 10) {
-            return 1;
-        } else if (secretNumber > number && count < 9) {
-            return 2;
-        } else if (number > secretNumber && count < 9) {
-            return 3;
+        if (secretNumber > number) {
+            System.out.println(player.getName() + " .Введенное число < того, что загадал компьютер." + " Осталось попыток " + (9 - count));
+            return false;
+        } else if (secretNumber < number) {
+            System.out.println(player.getName() + " .Введенное число > того, что загадал компьютер." + " Осталось попыток " + (9 - count));
+            return false;
         } else {
-            return 4;
+            return true;
         }
+    }
+
+    private void win(Player player) {
+        int count = player.getAttempt();
+        System.out.println("Игрок " + player.getName() + " угадал число " + secretNumber + " с " + (count + 1) + " попытки");
+    }
+
+    private void stopGame(Player player) {
+        if (secretNumber != player.getNumbers()[player.getAttempt()] && player.getAttempt() == 10) {
+            System.out.println("У " + player.getName() + " закончились попытки");
+        }
+        System.out.println(Arrays.toString(player.getNumbers()));
     }
 }
