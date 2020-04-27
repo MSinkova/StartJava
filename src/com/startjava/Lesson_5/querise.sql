@@ -1,38 +1,38 @@
  -- Научитесь делать следующие запросы:
  -- выведите всю таблицу
- Select * from Jaeger;
+SELECT * FROM Jaeger;
 
  -- отобразите только не уничтоженных роботов
-Select * from Jaeger
+SELECT * FROM Jaeger
 WHERE status <> 'Destroyed';
 
  -- отобразите роботов нескольких серий, например Mark-1 и Mark-6
-Select * from Jaeger
-WHERE mark = 'Mark-1'
-OR mark = 'Mark-6';
+SELECT * FROM Jaeger
+WHERE mark = 'Mark-1' OR mark = 'Mark-6';
 
  -- отсортируйте таблицу по убыванию по столбцу mark
- Select * from Jaeger
- ORDER BY mark DESC;
+SELECT * FROM Jaeger
+ORDER BY mark DESC;
 
  -- отобразите самого старого робота
-Select * From Jaeger
-where launch = (Select MIN(launch) from Jaeger);
+SELECT * FROM Jaeger
+WHERE launch = (SELECT MIN(launch) FROM Jaeger);
 
  -- отобразите роботов, которые уничтожили больше/меньше всех kaiju
-Select mark From Jaeger
-where kaijukill = (Select MAX(kaijukill) from Jaeger);
+SELECT mark FROM Jaeger
+WHERE kaijukill = (SELECT MAX(kaijukill) FROM Jaeger);
 
-Select mark From Jaeger
-where kaijukill = (Select MIN(kaijukill) from Jaeger);
+SELECT mark FROM Jaeger
+WHERE kaijukill = (SELECT MIN(kaijukill) FROM Jaeger);
 
  -- отобразите средний вес роботов
-Select AVG(weight) from Jaeger;
+SELECT AVG(weight) FROM Jaeger;
 
  -- увеличьте на единицу количество уничтоженных kaiju у роботов, которые до сих пор не разрушены
 UPDATE Jaeger SET kaijukill = kaijukill + 1
-  WHERE status <> 'Destroyed';
+WHERE status <> 'Destroyed';
 
  -- удалите уничтоженных роботов
-Delete From Jaeger where status = 'Destroyed';
+DELETE FROM Jaeger
+WHERE status = 'Destroyed';
 
